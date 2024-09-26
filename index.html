@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinner Suggestion App</title>
+    <title>What2Eat App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
             max-width: 600px;
         }
-        #dinner-list {
-            margin-top: 20px;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px;
+        #logo {
+            width: 150px; /* Adjust size as needed */
+            height: auto;
         }
     </style>
 </head>
 <body>
-<h1>Dinner Suggestion App</h1>
+<h1>What2Eat App</h1>
+
+<!-- Logo Implementation -->
+<picture>
+    <source srcset="assets/images/logo.webp" type="image/webp">
+    <img id="logo" src="assets/images/logo.svg" alt="What2Eat Logo">
+</picture>
 
 <div>
-    <input type="text" id="dinner-input" placeholder="Add a new dinner" onkeydown="handleEnter(event)">
+    <input type="text" id="dinner-input" placeholder="Add a new dinner">
     <button onclick="addDinner()">Add Dinner</button>
 </div>
-
 
 <div id="dinner-list"></div>
 
