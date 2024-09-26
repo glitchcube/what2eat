@@ -1,7 +1,7 @@
 {
   "name": "What2Eat",
   "short_name": "What2Eat",
-  "start_url": "/",
+  "start_url": "/what2eat",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",
