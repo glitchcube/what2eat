@@ -23,9 +23,10 @@
 <h1>Dinner Suggestion App</h1>
 
 <div>
-    <input type="text" id="dinner-input" placeholder="Add a new dinner">
+    <input type="text" id="dinner-input" placeholder="Add a new dinner" onkeydown="handleEnter(event)">
     <button onclick="addDinner()">Add Dinner</button>
 </div>
+
 
 <div id="dinner-list"></div>
 

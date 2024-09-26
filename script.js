@@ -1,7 +1,13 @@
-// Initialize the dinner list from localStorage if available
+// Function to handle Enter keypress
+const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+        addDinner();
+    }
+};
+
+// Rest of the existing code...
 let dinners = JSON.parse(localStorage.getItem('dinnerList')) || [];
 
-// Display the current list of dinners
 const displayDinners = () => {
     const dinnerList = document.getElementById('dinner-list');
     dinnerList.innerHTML = '';
@@ -10,7 +16,6 @@ const displayDinners = () => {
     });
 };
 
-// Add a new dinner to the list
 const addDinner = () => {
     const dinnerInput = document.getElementById('dinner-input');
     const newDinner = dinnerInput.value.trim();
@@ -22,14 +27,12 @@ const addDinner = () => {
     }
 };
 
-// Remove a dinner from the list
 const removeDinner = (index) => {
     dinners.splice(index, 1);
     localStorage.setItem('dinnerList', JSON.stringify(dinners));
     displayDinners();
 };
 
-// Suggest a random dinner
 const suggestDinner = () => {
     const suggestion = dinners.length > 0 ?
         `How about: ${dinners[Math.floor(Math.random() * dinners.length)]}?` :
@@ -38,5 +41,4 @@ const suggestDinner = () => {
     document.getElementById('suggested-dinner').innerText = suggestion;
 };
 
-// Load and display the dinner list when the page loads
 window.onload = displayDinners;
