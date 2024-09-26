@@ -31,12 +31,11 @@ const addDinner = () => {
 const addBulkDinners = () => {
     const bulkInput = document.getElementById('bulk-dinner-input').value.trim();
     if (bulkInput) {
-        // Split the input by new lines and filter out any empty lines
         const newDinners = bulkInput.split('\n').map(dinner => dinner.trim()).filter(dinner => dinner !== '');
-        dinners.push(...newDinners); // Add all new dinners to the list
+        dinners.push(...newDinners);
         localStorage.setItem('dinnerList', JSON.stringify(dinners));
-        document.getElementById('bulk-dinner-input').value = ''; // Clear the textarea
-        displayDinners(); // Update the display
+        document.getElementById('bulk-dinner-input').value = '';
+        displayDinners();
     }
 };
 
