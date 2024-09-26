@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What2Eat App</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#4CAF50">
 
     <style>
         body {
@@ -15,35 +22,12 @@
         #logo {
             width: 150px;
             height: auto;
-            margin-bottom: 20px;
-        }
-        #suggested-dinner {
-            font-size: 1.5em;
-            margin-top: 20px;
-            color: #333;
         }
         button {
             padding: 10px 20px;
             font-size: 1.2em;
             cursor: pointer;
             margin-top: 10px;
-        }
-        input, textarea {
-            margin-top: 10px;
-            padding: 10px;
-            width: 100%;
-            font-size: 1em;
-        }
-        textarea {
-            height: 100px;
-        }
-        .section {
-            margin-top: 30px;
-        }
-        #dinner-list p {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
     </style>
 </head>
@@ -55,12 +39,10 @@
     <img id="logo" src="assets/images/logo.svg" alt="What2Eat Logo">
 </picture>
 
-<!-- Main Feature: Dinner Suggestion -->
 <h1>What's for Dinner?</h1>
 <button onclick="suggestDinner()">Suggest a Dinner</button>
 <p id="suggested-dinner">Click the button to get a dinner suggestion.</p>
 
-<!-- Secondary Functionality: Add and Remove Dinners -->
 <div class="section">
     <h2>Add a Dinner</h2>
     <input type="text" id="dinner-input" placeholder="Add a new dinner" onkeydown="handleEnter(event)">
@@ -81,5 +63,18 @@
 </div>
 
 <script src="script.js"></script>
+
+<!-- Register the service worker -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').then((registration) => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            }).catch((error) => {
+                console.log('Service Worker registration failed:', error);
+            });
+        });
+    }
+</script>
 </body>
 </html>
