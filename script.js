@@ -5,7 +5,7 @@ const handleEnter = (event) => {
     }
 };
 
-// Rest of the existing code...
+// Initialize dinner list from localStorage
 let dinners = JSON.parse(localStorage.getItem('dinnerList')) || [];
 
 const displayDinners = () => {
@@ -27,6 +27,19 @@ const addDinner = () => {
     }
 };
 
+// Function to add multiple dinners from textarea input
+const addBulkDinners = () => {
+    const bulkInput = document.getElementById('bulk-dinner-input').value.trim();
+    if (bulkInput) {
+        // Split the input by new lines and filter out any empty lines
+        const newDinners = bulkInput.split('\n').map(dinner => dinner.trim()).filter(dinner => dinner !== '');
+        dinners.push(...newDinners); // Add all new dinners to the list
+        localStorage.setItem('dinnerList', JSON.stringify(dinners));
+        document.getElementById('bulk-dinner-input').value = ''; // Clear the textarea
+        displayDinners(); // Update the display
+    }
+};
+
 const removeDinner = (index) => {
     dinners.splice(index, 1);
     localStorage.setItem('dinnerList', JSON.stringify(dinners));
@@ -41,4 +54,5 @@ const suggestDinner = () => {
     document.getElementById('suggested-dinner').innerText = suggestion;
 };
 
+// Load dinners when page loads
 window.onload = displayDinners;
