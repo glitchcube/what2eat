@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What2Eat App</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,7 +13,7 @@
             max-width: 600px;
         }
         #logo {
-            width: 150px; /* Adjust size as needed */
+            width: 150px;
             height: auto;
         }
     </style>
@@ -19,16 +21,17 @@
 <body>
 <h1>What2Eat App</h1>
 
-<!-- Logo Implementation -->
+<!-- Logo Display -->
 <picture>
     <source srcset="assets/images/logo.webp" type="image/webp">
     <img id="logo" src="assets/images/logo.svg" alt="What2Eat Logo">
 </picture>
 
 <div>
-    <input type="text" id="dinner-input" placeholder="Add a new dinner">
+    <input type="text" id="dinner-input" placeholder="Add a new dinner" onkeydown="handleEnter(event)">
     <button onclick="addDinner()">Add Dinner</button>
 </div>
+
 
 <div id="dinner-list"></div>
 
