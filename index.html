@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What2Eat App</title>
 
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4CAF50">
@@ -41,16 +44,23 @@
 
         .bottom-nav button {
             flex: 1;
-            padding: 15px;
+            padding: 10px;
             color: white;
             font-size: 1.1em;
             background-color: transparent;
             border: none;
             cursor: pointer;
+            text-align: center;
         }
 
         .bottom-nav button.active {
             background-color: #388E3C;
+        }
+
+        .bottom-nav i {
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 5px;
         }
 
         #logo {
@@ -106,8 +116,12 @@
 
 <!-- Bottom Navigation Bar -->
 <div class="bottom-nav">
-    <button class="active" onclick="openTab('suggest-tab')">Suggest Dinner</button>
-    <button onclick="openTab('manage-tab')">Manage Dinners</button>
+    <button class="active" onclick="openTab('suggest-tab')">
+        <i class="fas fa-utensils"></i><br>Suggest Dinner
+    </button>
+    <button onclick="openTab('manage-tab')">
+        <i class="fas fa-list"></i><br>Manage Dinners
+    </button>
 </div>
 
 <script src="script.js"></script>
