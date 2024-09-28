@@ -5,12 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What2Eat App</title>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
-
-    <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
-
     <meta name="theme-color" content="#4CAF50">
 
     <style>
@@ -18,16 +14,56 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             max-width: 600px;
+            padding-bottom: 50px; /* For bottom nav bar */
         }
+
+        /* Tab content - hidden by default */
+        .tab-content {
+            display: none;
+        }
+
+        /* Show the active tab */
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Bottom navigation bar */
+        .bottom-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #4CAF50;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+        .bottom-nav button {
+            flex: 1;
+            padding: 15px;
+            color: white;
+            font-size: 1.1em;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .bottom-nav button.active {
+            background-color: #388E3C;
+        }
+
         #logo {
             width: 150px;
             height: auto;
+            margin-bottom: 20px;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            cursor: pointer;
+
+        textarea, input {
             margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 1em;
         }
     </style>
 </head>
@@ -39,42 +75,61 @@
     <img id="logo" src="assets/images/logo.svg" alt="What2Eat Logo">
 </picture>
 
-<h1>What's for Dinner?</h1>
-<button onclick="suggestDinner()">Suggest a Dinner</button>
-<p id="suggested-dinner">Click the button to get a dinner suggestion.</p>
-
-<div class="section">
-    <h2>Add a Dinner</h2>
-    <input type="text" id="dinner-input" placeholder="Add a new dinner" onkeydown="handleEnter(event)">
-    <button onclick="addDinner()">Add Dinner</button>
+<!-- Tab Content for "Suggest Dinner" -->
+<div id="suggest-tab" class="tab-content active">
+    <h1>What's for Dinner?</h1>
+    <button onclick="suggestDinner()">Suggest a Dinner</button>
+    <p id="suggested-dinner">Click the button to get a dinner suggestion.</p>
 </div>
 
-<!-- Bulk add textarea -->
-<div class="section">
-    <h2>Add Multiple Dinners</h2>
-    <textarea id="bulk-dinner-input" placeholder="Paste multiple dinners here (one per line)"></textarea>
-    <button onclick="addBulkDinners()">Add Dinners in Bulk</button>
+<!-- Tab Content for "Manage Dinners" -->
+<div id="manage-tab" class="tab-content">
+    <div class="section">
+        <h2>Add a Dinner</h2>
+        <input type="text" id="dinner-input" placeholder="Add a new dinner" onkeydown="handleEnter(event)">
+        <button onclick="addDinner()">Add Dinner</button>
+    </div>
+
+    <!-- Bulk add textarea -->
+    <div class="section">
+        <h2>Add Multiple Dinners</h2>
+        <textarea id="bulk-dinner-input" placeholder="Paste multiple dinners here (one per line)"></textarea>
+        <button onclick="addBulkDinners()">Add Dinners in Bulk</button>
+    </div>
+
+    <!-- Dinner List Display -->
+    <div class="section">
+        <h2>Current Dinner List</h2>
+        <div id="dinner-list"></div>
+    </div>
 </div>
 
-<!-- Dinner List Display -->
-<div class="section">
-    <h2>Current Dinner List</h2>
-    <div id="dinner-list"></div>
+<!-- Bottom Navigation Bar -->
+<div class="bottom-nav">
+    <button class="active" onclick="openTab('suggest-tab')">Suggest Dinner</button>
+    <button onclick="openTab('manage-tab')">Manage Dinners</button>
 </div>
 
 <script src="script.js"></script>
 
-<!-- Register the service worker -->
+<!-- JavaScript to switch between tabs -->
 <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js').then((registration) => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            }).catch((error) => {
-                console.log('Service Worker registration failed:', error);
-            });
+    function openTab(tabId) {
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach((tab) => {
+            tab.classList.remove('active');
         });
+
+        // Remove active class from all buttons
+        document.querySelectorAll('.bottom-nav button').forEach((btn) => {
+            btn.classList.remove('active');
+        });
+
+        // Show the selected tab and activate the button
+        document.getElementById(tabId).classList.add('active');
+        document.querySelector(`[onclick="openTab('${tabId}')"]`).classList.add('active');
     }
 </script>
+
 </body>
 </html>
