@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="assets/manifest.json">
     <meta name="theme-color" content="#4CAF50">
 </head>
 <body>
@@ -28,7 +28,7 @@
     <!-- Tab Content for "Suggest Dinner" -->
     <section id="suggest-tab" class="tab-content active" aria-labelledby="suggest-dinner-button">
         <h1>What's for Dinner?</h1>
-        <button id="suggest-button" onclick="suggestDinner()" aria-label="Suggest a dinner">Suggest a Dinner</button>
+        <button id="suggest-button" onclick="suggestDinner()">Suggest a Dinner</button>
         <p id="suggested-dinner">Click the button to get a dinner suggestion.</p>
     </section>
 
@@ -37,7 +37,7 @@
         <h2>Manage Your Dinners</h2>
         <div class="section">
             <h3>Add a Dinner</h3>
-            <input type="text" id="dinner-input" placeholder="Add a new dinner" onkeydown="handleEnter(event)" aria-label="Add dinner input">
+            <input type="text" id="dinner-input" placeholder="Add a new dinner" aria-label="Add dinner input">
             <button onclick="addDinner()" aria-label="Add dinner">Add Dinner</button>
         </div>
 
@@ -64,25 +64,7 @@
     </button>
 </nav>
 
+<!-- Link to external JavaScript file -->
 <script src="assets/js/script.js"></script>
-
-<!-- JavaScript to switch between tabs -->
-<script>
-    function openTab(tabId) {
-        // Hide all tab contents
-        document.querySelectorAll('.tab-content').forEach((tab) => {
-            tab.classList.remove('active');
-        });
-
-        // Remove active class from all buttons
-        document.querySelectorAll('.bottom-nav button').forEach((btn) => {
-            btn.classList.remove('active');
-        });
-
-        // Show the selected tab and activate the button
-        document.getElementById(tabId).classList.add('active');
-        document.querySelector(`[onclick="openTab('${tabId}')"]`).classList.add('active');
-    }
-</script>
 </body>
 </html>
